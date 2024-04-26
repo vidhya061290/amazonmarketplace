@@ -1,5 +1,7 @@
 package com.amazon.Marketplace.services.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,4 +25,12 @@ public class ProductServiceImpl implements ProductService{
 	
 	}
 
+	@Override
+	public ProductDto getById(int id) {
+		Optional<Product> product = productrepository.findById(id);
+				      //    orElseThrow(()->new RuntimeException("product of this id doesnt exist"));
+	     ProductDto productdto=	ProductMapper.mapToProductDto(product.get());
+	     return productdto;
+		
+	}
 }
